@@ -35,7 +35,7 @@ export const Hero = () => {
           animate={{ opacity: 1, scale: 1 }} 
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <Link to="/signup">
+          <Link to="/register">
             <Button text="Sign Up" className="mr-5 rounded-full px-8 font-light bg-[#32347c] text-white hover:opacity-70 ease-in duration-100" />
           </Link>
           <Link to="/login">

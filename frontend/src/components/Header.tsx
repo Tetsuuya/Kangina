@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="flex justify-between items-center mx-auto px-10 py-4 md:py-2 max-w-[1500px]">
+      <div className="flex justify-between items-center w-screen  px-10 py-4 md:py-2 max-w-[1500px] shadow-lg">
         <div>
           <Link to="/">
             <LogoRed/>
