@@ -1,20 +1,38 @@
-**Step 1** : Git clone 
+# Project Setup Guide
 
-**step2**: Cd fronend 
+**Step 1:** Clone the Repository  
+git clone <repository-url>
 
-**step 3:** insdie frontend add .env file 
-                  inside: 
-                  VITE_BACKEND_URL=http://127.0.0.1:8000/api
+**Step 2:** Navigate to the Frontend Folder  
+cd frontend
 
-**step 4**: npm i 
+**Step 3:** Create a .env file inside the frontend folder  
+Inside the .env file, add:  
+VITE_BACKEND_URL=http://127.0.0.1:8000/api
 
-**step 5:** cd backend 
+**Step 4:** Install frontend dependencies  
+npm install
 
-**step 6:** 
-          run: 
-              python -m venv venv
-              venv\Scripts\activate
-              pip install -r requirements.txt
+**Step 5:** Navigate to the Backend Folder  
+cd backend
 
-**step 7**: rontend , npm run dev 
-            backend , py manage.py runserver 
+**Step 6:** Set up the Python virtual environment and install requirements  
+python -m venv venv  
+venv\Scripts\activate  
+pip install -r requirements.txt
+
+**Step 7:** Run the Frontend and Backend  
+
+For frontend (inside frontend folder):  
+npm run dev
+
+For backend (inside backend folder):  
+python manage.py runserver
+
+Make sure both the frontend and backend are running for the system to work correctly.
+
+The frontend will usually run at:  
+http://localhost:5173
+
+The backend will usually run at:  
+http://127.0.0.1:8000
