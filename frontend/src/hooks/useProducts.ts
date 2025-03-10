@@ -1,8 +1,8 @@
 // src/hooks/useProducts.ts
 
 import { useQuery } from '@tanstack/react-query';
-import { useProductStore } from '../store/productStore';
 import { productApi, CategoryOption, Product } from '../api/productApi';
+import { useState } from 'react';
 
 export const useCategories = () => {
   return useQuery<CategoryOption[], Error>({
@@ -21,13 +21,18 @@ export const useProductsByCategory = (category: string) => {
 };
 
 export const useProducts = () => {
-  const { selectedCategory, setSelectedCategory } = useProductStore();
+  // Use local state instead of Zustand
+  const [selectedCategory, setSelectedCategory] = useState('ALL');
   
   const categoriesQuery = useCategories();
   const productsQuery = useProductsByCategory(selectedCategory);
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
+  };
+
+  const resetProductStore = () => {
+    setSelectedCategory('ALL');
   };
 
   return {
@@ -40,5 +45,6 @@ export const useProducts = () => {
     
     // Actions
     handleCategorySelect,
+    resetProductStore,
   };
 };

@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import useLogout from '../../hooks/useLogout';
-import useAppStore from '../../store/homeuserstore'; // adjust the import path
+import { useNavigate } from 'react-router-dom'; // Added for navigation
+import useAuthStore from '../../store/authstore';
+import useAppStore from '../../store/homeuserstore';
 import LogoBlue from '../../components/ui/LogoBlue';
 import { X, Menu } from 'lucide-react';
 
 const LeftSidebar: React.FC = () => {
-    const { mutate: logout } = useLogout();
+    const navigate = useNavigate(); // For navigation after logout
+    const { logout } = useAuthStore();
     const [activeButton, setActiveButton] = useState<'home' | 'profile'>('home');
     
     // Use Zustand store
@@ -15,6 +17,11 @@ const LeftSidebar: React.FC = () => {
         setActiveSection(section);
         setActiveButton(section);
         setIsMobileMenuOpen(false);
+    };
+
+    const handleLogout = async () => {
+        await logout(); // Wait for logout to complete
+        navigate('/login'); // Redirect to login page after logout
     };
 
     return (
@@ -71,7 +78,7 @@ const LeftSidebar: React.FC = () => {
 
                 {/* Bottom Logout Button */}
                 <button 
-                    onClick={() => logout()} 
+                    onClick={handleLogout} 
                     className="w-full py-2 px-4 border border-[#32347C] rounded-full text-[#32347C] hover:bg-[#32347C] hover:text-white transition mt-auto"
                 >
                     Log out

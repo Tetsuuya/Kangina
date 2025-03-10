@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,} from 'react';
 import { Product } from '../../api/productApi';
 import { useCartStore } from '../../store/cartStore';
 import { useFavoriteStore } from '../../store/storeFavorites';
@@ -13,27 +13,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { addItem, isLoading: isCartLoading } = useCartStore();
   const { toggleFavorite, isFavorite } = useFavoriteStore();
   
-  // Local state to track favorite status
-  const [isFav, setIsFav] = useState<boolean>(false);
+  // Get favorite status directly from the store
+  const isFav = isFavorite(product.id);
   
   // State for controlling the detail modal
   const [showDetails, setShowDetails] = useState(false);
-  
-  // Update favorite status whenever the component mounts or product changes
-  useEffect(() => {
-    const checkFavoriteStatus = () => {
-      setIsFav(isFavorite(product.id));
-    };
-    
-    // Check initial status
-    checkFavoriteStatus();
-    
-    // Set up interval to periodically check the favorite status
-    const intervalId = setInterval(checkFavoriteStatus, 500);
-    
-    // Clean up interval on unmount
-    return () => clearInterval(intervalId);
-  }, [product.id, isFavorite]);
   
   const handleAddToCart = () => {
     addItem(product.id);
@@ -41,8 +25,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   
   const handleToggleFavorite = () => {
     toggleFavorite(product.id);
-    // Update the local state immediately for better UX
-    setIsFav(!isFav);
   };
   
   return (

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LeftSidebar from '../components/Sidebar/LeftSidebar';
 import RightSidebar from '../components/Sidebar/RightSidebar';
-import useAppStore from '../store/homeuserstore'; // adjust the import path
+import useAppStore from '../store/homeuserstore';
+import useAuthStore from '../store/authstore';
 import { useProducts } from '../hooks/useProducts';
 import { CategorySelector, ProductGrid } from '../components/products';
 import SearchBar from '../components/Searchbar';
@@ -9,6 +10,14 @@ import UserProfile from '../components/userprofile/UserProfile';
 
 const Home: React.FC = () => {
     const { activeSection } = useAppStore();
+    const { user, checkAuthStatus } = useAuthStore();
+    
+    useEffect(() => {
+        // Ensure user data is loaded
+        if (!user) {
+            checkAuthStatus();
+        }
+    }, [user, checkAuthStatus]);
 
     const { 
         categoriesQuery,
@@ -56,8 +65,11 @@ const Home: React.FC = () => {
                                 error={productsErrorDetails}
                             />
                         </>
-                    ) : (
+                    ) : activeSection === 'profile' ? (
                         <UserProfile />
+                    ) : (
+                        // Default fallback, should not happen with current store
+                        <div className="p-4">Content not available</div>
                     )}
                 </div>
             </div>

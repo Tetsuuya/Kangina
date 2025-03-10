@@ -1,7 +1,5 @@
-import axios from 'axios';
+import api from './api';  // Import the shared API instance
 import { Product } from '../api/productApi';  // Adjust import path as needed
-
-const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export interface FavoriteToggleResponse {
   status: string;
@@ -15,15 +13,7 @@ export const favoriteApi = {
    */
   toggleFavorite: async (productId: number): Promise<FavoriteToggleResponse> => {
     try {
-      const response = await axios.post(
-        `${API_URL}/favorites/toggle/${productId}/`, 
-        {},
-        {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-          }
-        }
-      );
+      const response = await api.post(`/favorites/toggle/${productId}/`, {});
       return response.data;
     } catch (error) {
       console.error('Error toggling favorite:', error);
@@ -37,11 +27,7 @@ export const favoriteApi = {
    */
   getFavoritesList: async (): Promise<Product[]> => {
     try {
-      const response = await axios.get(`${API_URL}/favorites/favorites_list/`, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-        }
-      });
+      const response = await api.get('/favorites/favorites_list/');
       return response.data;
     } catch (error) {
       console.error('Error fetching favorites:', error);

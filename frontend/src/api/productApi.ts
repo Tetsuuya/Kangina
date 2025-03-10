@@ -1,6 +1,5 @@
 // src/api/productApi.ts
-
-import axios from 'axios';
+import api from './api';
 
 // Define type interfaces
 export interface Product {
@@ -23,25 +22,17 @@ export interface CategoryOption {
   label: string;
 }
 
-// Read backend URL from environment variable
-const API_URL = import.meta.env.VITE_BACKEND_URL;
-
-// Create axios instance with base URL
-const apiClient = axios.create({
-  baseURL: API_URL,
-});
-
 // Product-related API calls
 export const productApi = {
   // Get all categories
   getCategories: async (): Promise<CategoryOption[]> => {
-    const response = await apiClient.get<CategoryOption[]>('/categories/');
+    const response = await api.get<CategoryOption[]>('/categories/');
     return response.data;
   },
 
   // Get products by category
   getProductsByCategory: async (category: string): Promise<Product[]> => {
-    const response = await apiClient.get<Product[]>(`/products/category/${category}/`);
+    const response = await api.get<Product[]>(`/products/category/${category}/`);
     return response.data;
   }
 };

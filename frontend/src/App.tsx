@@ -1,17 +1,33 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import LandingPage from './pages/Landingpage/Landingpage';
 import Home from './pages/Home';
 import Login from './pages/login';
 import Register from './pages/register';
+import PrivateRoute from './components/PrivateRoute';
+import useAuthStore from './store/authstore';
+import UserProfilePage from './components/userprofile/UserProfile';
+
 function App() {
+    const { checkAuthStatus, hasCheckedAuth } = useAuthStore();
+    
+    // Check authentication status only once when the app loads
+    useEffect(() => {
+        if (!hasCheckedAuth) {
+            checkAuthStatus();
+        }
+    }, [checkAuthStatus, hasCheckedAuth]);
+    
     return (
         <Router>
-                <Routes>
-                    <Route path="/" element={<LandingPage />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                </Routes>
+            <Routes>
+                <Route path="/" element={<LandingPage />} />
+                {/* Remove the duplicate route and use only the protected one */}
+                <Route path="/home" element={<PrivateRoute element={<Home />} />} />
+                <Route path="/profile" element={<PrivateRoute element={<UserProfilePage />} />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
         </Router>
     );
 }
