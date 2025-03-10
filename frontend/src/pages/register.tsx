@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { EyeIcon } from 'lucide-react';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import FoodBlue from '../assets/FoodBlue.png';
 import LogoBlue from '../components/ui/LogoBlue';
 import useAuthStore from '../store/authstore';
@@ -10,7 +10,6 @@ const Register = () => {
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const { register, error, isLoading } = useAuthStore();
   const navigate = useNavigate();
@@ -22,15 +21,12 @@ const Register = () => {
         username, 
         email, 
         password, 
-        confirmPassword, 
         full_name: fullName
       });
       
       // If registration doesn't throw an error, navigate to login
-      // This assumes the register function throws an error on failure
       navigate('/login');
     } catch (err) {
-      // Error handling is already done by the store, no need to do anything here
       console.error("Registration failed:", err);
     }
   };
@@ -88,18 +84,8 @@ const Register = () => {
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-5 top-6 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
             >
-              <EyeIcon size={20} />
+              {showPassword ? <EyeOffIcon size={20} /> : <EyeIcon size={20} />}
             </button>
-          </div>
-          <div className="relative">
-            <input 
-              type={showPassword ? "text" : "password"} 
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400 pr-10 placeholder-gray-500" 
-              required 
-            />
           </div>
           {error && <p className="text-red-500">{error}</p>}
           <button 

@@ -51,7 +51,6 @@ interface RegisterData {
   username: string;
   email: string;
   password: string;
-  confirmPassword: string;
   full_name: string;
 }
 
@@ -98,12 +97,7 @@ const useAuthStore = create<AuthState>((set, get) => ({
     }
   },
 
-  register: async ({ username, email, password, confirmPassword, full_name }) => {
-    if (password !== confirmPassword) {
-      set({ error: 'Passwords do not match', isLoading: false });
-      return false;
-    }
-  
+  register: async ({ username, email, password, full_name }) => {
     set({ isLoading: true, error: null, success: false });
     try {
       // Just register the user but don't auto-login
