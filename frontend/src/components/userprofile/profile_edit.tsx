@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import useAuthStore from '../../store/authstore';
 import { motion } from 'framer-motion';
 
+
+
 interface ProfileEditModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -147,6 +149,8 @@ export const ProfileEditModal: React.FC<ProfileEditModalProps> = ({ isOpen, onCl
   };
 
   if (!isOpen) return null;
+
+  
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[9999]">

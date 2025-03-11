@@ -1,3 +1,4 @@
+// First, let's update your productApi.ts to add search functionality
 // src/api/productApi.ts
 import api from './api';
 
@@ -33,6 +34,12 @@ export const productApi = {
   // Get products by category
   getProductsByCategory: async (category: string): Promise<Product[]> => {
     const response = await api.get<Product[]>(`/products/category/${category}/`);
+    return response.data;
+  },
+
+  // Add search products function
+  searchProducts: async (query: string): Promise<Product[]> => {
+    const response = await api.get<Product[]>(`/products/search?q=${encodeURIComponent(query)}`);
     return response.data;
   }
 };

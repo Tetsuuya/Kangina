@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search } from 'lucide-react';
 
 interface SearchBarProps {
   className?: string;
+  onSearch?: (query: string) => void;
+  initialValue?: string;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  className = ""
+  className = "",
+  onSearch = () => {},
+  initialValue = ""
 }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(initialValue);
   const [isFocused, setIsFocused] = useState(false);
+
+  // Update search term if initialValue changes
+  useEffect(() => {
+    setSearchTerm(initialValue);
+  }, [initialValue]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Search term:', searchTerm);
-    // Search functionality will be implemented later
+    onSearch(searchTerm);
   };
+
+  // Debounce search as user types
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      onSearch(searchTerm);
+    }, 300); // 300ms delay for responsive search
+
+    return () => clearTimeout(timerId);
+  }, [searchTerm, onSearch]);
 
   return (
     <form onSubmit={handleSubmit} className={`relative ${className}`}>
