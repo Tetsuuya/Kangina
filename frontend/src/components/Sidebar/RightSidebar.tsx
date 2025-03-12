@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useCartStore } from '../../store/cartStore';
-import useAuthStore from '../../store/authstore';
-import { useOrderStore } from '../../store/storeorders';
+import { useCartStore } from '../../store/CartStore';
+import useAuthStore from '../../store/AuthStore';
+import { useOrderStore } from '../../store/StoreOrders';
 
 // Define interface for cart item   
 interface CartItem {

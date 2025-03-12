@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../store/authstore';
-import { useFavoriteStore } from '../../store/storeFavorites';
-import { useOrderStore } from '../../store/storeorders';
-import { ProfileEditModal } from './profile_edit';
+import useAuthStore from "../../store/AuthStore";
+import { useFavoriteStore } from '../../store/StoreFavorites';
+import { useOrderStore } from '../../store/StoreOrders';
+import { ProfileEditModal } from './ProfileEdit';
 
 const UserProfilePage = () => {
   const navigate = useNavigate();

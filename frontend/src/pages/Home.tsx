@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import LeftSidebar from '../components/Sidebar/LeftSidebar';
 import RightSidebar from '../components/Sidebar/RightSidebar';
-import useAppStore from '../store/homeuserstore';
-import useAuthStore from '../store/authstore';
+import useAppStore from '../store/HomeUserStore';
+import useAuthStore from '../store/AuthStore';
 import { useProducts } from '../hooks/useProducts';
 import { CategorySelector } from '../components/products';
 import { ProductGrid } from '../components/products/ProductGrid';

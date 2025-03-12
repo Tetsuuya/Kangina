@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import FoodHp from "../../assets/FoodRed.png";
+import FoodHp from "../../assets/FoodRed2.png";
+import Food from "../../assets/Food.png";
 import Button from "../../components/ui/Button";
 import Wordmark from '../../assets/Wordmark.png'
 
@@ -10,9 +11,9 @@ export const Hero = () => {
       {/* Left Side - Animated Text and Buttons */}
       <motion.div 
         className="w-full md:w-1/2 self-center px-5 mx-10 text-center md:text-left md:mt-10"
-        initial={{ opacity: 0, x: -50 }} // Start hidden and slightly left
-        animate={{ opacity: 1, x: 0 }} // Fade in and move to position
-        transition={{ duration: 1, ease: "easeOut" }} // Smooth transition
+        initial={{ opacity: 0, x: -50 }} 
+        animate={{ opacity: 1, x: 0 }} 
+        transition={{ duration: 1, ease: "easeOut" }} 
       >
         
       <div>
@@ -45,14 +46,31 @@ export const Hero = () => {
       </motion.div>
 
       {/* Right Side - Animated Image */}
-      <motion.img 
-        src={FoodHp} 
-        alt="Food" 
-        className="w-full md:w-1/2 object-cover max-h-[500px] md:max-h-screen md:block hidden"
-        initial={{ opacity: 0, y: 50 }} // Start hidden and slightly lower
-        animate={{ opacity: 1, y: 0 }} // Fade in and move up
-        transition={{ duration: 1, ease: "easeOut" }} // Smooth animation
-      />
+      <motion.div
+        className="relative w-full md:w-1/2 md:block hidden"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <img
+          src={FoodHp}
+          alt="Background"
+          className="w-full object-cover max-h-[500px] md:max-h-screen"
+        />
+        <motion.img
+          src={Food}
+          alt="Food Dish"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/4 w-4/5" 
+          style={{ translateX: "-50%", translateY: "-50%" }} 
+          initial={{ rotate: 0 }}
+          animate={{ rotate: 360 }} 
+          transition={{ 
+            duration: 60, 
+            ease: "linear", 
+            repeat: Infinity 
+          }}
+        />
+      </motion.div>
     </div>
   );
 };

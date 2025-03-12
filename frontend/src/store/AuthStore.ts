@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import api from '../api/api';
 import { ACCESS_TOKEN, REFRESH_TOKEN } from '../api/constants';
-import { useFavoriteStore } from './storeFavorites'; // Import the favorites store
+import { useFavoriteStore } from './StoreFavorites'; // Import the favorites store
 
 interface AuthUser {
   id: number;
