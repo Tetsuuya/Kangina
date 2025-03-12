@@ -4,7 +4,7 @@ import AnimatedCounter from '../../components/ui/AnimatedCounter';
 
 const About = () => {
   return (
-    <section className="bg-[#F58E26] py-12 text-white md:mt-4 p-10">
+    <section className="bg-[#F58E26] py-12 text-white md:mt-0.4 p-10">
       <div className="container mx-auto flex flex-col md:flex-row justify-center items-center gap-4">
         {/* Carousel - Now automatic */}
         <div className="w-full md:w-1/2 sm:w-2/3 lg:w-1/3 mb-6 md:mb-0 flex justify-center flex-1">

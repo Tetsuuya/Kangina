@@ -2,14 +2,16 @@ import { useState, useEffect, useRef } from 'react';
 import images from '../../utils/ImportedImages';
 
 const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [slides, setSlides] = useState([]);
-  const timerRef = useRef(null);
-  const slideContainerRef = useRef(null);
-  const isTransitioning = useRef(false);
-
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [slides, setSlides] = useState<string[]>([]);
+  // Changed from NodeJS.Timeout to number for browser setTimeout/setInterval
+  const timerRef = useRef<number | null>(null);
+  const slideContainerRef = useRef<HTMLDivElement | null>(null);
+  const isTransitioning = useRef<boolean>(false);
   
   useEffect(() => {
+    if (images.length === 0) return;
+    
     const lastImage = images[images.length - 1];
     const firstImage = images[0];
     setSlides([lastImage, ...images, firstImage]);
@@ -18,29 +20,33 @@ const Carousel = () => {
 
   // Handle infinite loop transition
   useEffect(() => {
-    if (!slideContainerRef.current) return;
+    if (!slideContainerRef.current || slides.length === 0) return;
 
     const handleTransitionEnd = () => {
       isTransitioning.current = false;
       
       if (currentIndex >= slides.length - 1) {
-        slideContainerRef.current.style.transition = 'none';
-        setCurrentIndex(1);
-        setTimeout(() => {
-          if (slideContainerRef.current) {
-            slideContainerRef.current.style.transition = 'transform 700ms ease-in-out';
-          }
-        }, 10);
+        if (slideContainerRef.current) {
+          slideContainerRef.current.style.transition = 'none';
+          setCurrentIndex(1);
+          setTimeout(() => {
+            if (slideContainerRef.current) {
+              slideContainerRef.current.style.transition = 'transform 700ms ease-in-out';
+            }
+          }, 10);
+        }
       }
       
       if (currentIndex <= 0) {
-        slideContainerRef.current.style.transition = 'none';
-        setCurrentIndex(slides.length - 2);
-        setTimeout(() => {
-          if (slideContainerRef.current) {
-            slideContainerRef.current.style.transition = 'transform 700ms ease-in-out';
-          }
-        }, 10);
+        if (slideContainerRef.current) {
+          slideContainerRef.current.style.transition = 'none';
+          setCurrentIndex(slides.length - 2);
+          setTimeout(() => {
+            if (slideContainerRef.current) {
+              slideContainerRef.current.style.transition = 'transform 700ms ease-in-out';
+            }
+          }, 10);
+        }
       }
     };
 
@@ -59,14 +65,14 @@ const Carousel = () => {
     }
     
     return () => {
-      if (timerRef.current) {
+      if (timerRef.current !== null) {
         clearInterval(timerRef.current);
       }
     };
   }, [slides.length]);
 
   const startAutoSlide = () => {
-    if (timerRef.current) {
+    if (timerRef.current !== null) {
       clearInterval(timerRef.current);
     }
     
@@ -75,24 +81,26 @@ const Carousel = () => {
         isTransitioning.current = true;
         setCurrentIndex(prevIndex => prevIndex + 1);
       }
-    }, 4000);
+    }, 4000) as unknown as number;
+    // The cast is needed because browser's setInterval returns a number
   };
 
   const stopAutoSlide = () => {
-    if (timerRef.current) {
+    if (timerRef.current !== null) {
       clearInterval(timerRef.current);
+      timerRef.current = null;
     }
   };
 
   // Actual index for indicator dots
-  const getActualIndex = () => {
+  const getActualIndex = (): number => {
     if (currentIndex === 0) return images.length - 1;
     if (currentIndex === slides.length - 1) return 0;
     return currentIndex - 1;
   };
 
   // Indicator dot click handler
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     if (!isTransitioning.current) {
       isTransitioning.current = true;
       setCurrentIndex(index + 1); 
