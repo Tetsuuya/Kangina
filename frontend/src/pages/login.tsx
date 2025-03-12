@@ -80,7 +80,7 @@ const Login = () => {
             className="w-full py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
             disabled={isLoading}
           >
-            {isLoading ? 'Loading...' : 'Log in'}
+            {isLoading ? 'Signing In...' : 'Log in'}
           </button>
         </form>
         {error && (
