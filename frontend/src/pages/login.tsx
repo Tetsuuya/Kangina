@@ -26,7 +26,7 @@ const Login = () => {
     await login(email, password);
   };
 
-  const handleSignUpClick = (e) => {
+  const handleSignUpClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     setIsExiting(true);
     
@@ -160,7 +160,7 @@ const Login = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              {isLoading ? 'Loading...' : 'Log in'}
+              {isLoading ? 'Signing In...' : 'Log in'}
             </motion.button>
           </motion.form>
           
