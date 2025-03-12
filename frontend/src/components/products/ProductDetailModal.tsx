@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from '../../api/productApi';
-import { useFavoriteStore } from '../../store/storeFavorites';
-import { useCartStore } from '../../store/cartStore';
+import { useFavoriteStore } from '../../store/StoreFavorites';
+import { useCartStore } from '../../store/CartStore';
 
 interface ProductDetailModalProps {
   product: Product;

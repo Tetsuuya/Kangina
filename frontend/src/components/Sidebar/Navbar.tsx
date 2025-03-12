@@ -2,7 +2,7 @@ import { Link as ScrollLink } from 'react-scroll'
 const Navbar: React.FC = () => {
   return (
     <nav className="hidden md:flex flex-grow justify-center space-x-12">
-      {["Home", "About", "Features", "Team"].map((item) => (
+      {["Home", "About", "Services", "Team"].map((item) => (
         <ScrollLink
           key={item}
           to={item.toLowerCase()} // Must match the section's ID

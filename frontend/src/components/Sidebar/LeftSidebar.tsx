@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Added for navigation
-import useAuthStore from '../../store/authstore';
-import useAppStore from '../../store/homeuserstore';
+import useAuthStore from '../../store/AuthStore';
+import useAppStore from '../../store/HomeUserStore';
 import LogoBlue from '../../components/ui/LogoBlue';
 import { X, Menu } from 'lucide-react';
 

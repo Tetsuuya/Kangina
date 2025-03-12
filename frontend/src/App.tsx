@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import LandingPage from './pages/Landingpage/Landingpage';
+import LandingPage from './pages/Landingpage/LandingPage';
 import Home from './pages/Home';
-import Login from './pages/login';
-import Register from './pages/register';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import PrivateRoute from './components/PrivateRoute';
-import useAuthStore from './store/authstore';
+import useAuthStore from './store/AuthStore';
 import UserProfilePage from './components/userprofile/UserProfile';
 
 function App() {

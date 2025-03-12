@@ -2,35 +2,54 @@ import Mark from "../../assets/Mark.png"
 import Roxanne from "../../assets/Roxanne.png"
 import Rhenel from "../../assets/Rhenel.png"
 
-interface MemberCard {
-    image: string; // URL or import path for the image
-    name: string;
-    title: string;
-  }
+interface MemberCardProps {
+  image: string; 
+  name: string;
+  title: string;
+}
 
-const MemberCard:React.FC<MemberCard> = ({ image, name, title }) => {
-    return(
-        <div className="w-50">
-            <img src={image} alt={name} className="w-50"/>
-            <h3 className="text-[1.5rem] font-[600] text-[#32347C] text-center">{name}</h3>
-            <h4 className="text-[#525252] text-center">{title}</h4>
-        </div>
-    );
+const MemberCard: React.FC<MemberCardProps> = ({ image, name, title }) => {
+  return (
+    <div className="flex flex-col items-center text-center w-62">
+      <div className="w-48 h-48 mb-4">
+        <img 
+          src={image} 
+          alt={name} 
+          className="w-full h-full object-contain"
+        />
+      </div>
+      <h3 className="text-[#32347C] text-xl font-semibold mb-1">{name}</h3>
+      <p className="text-[#525252] text-base">{title}</p>
+    </div>
+  );
 }
 
 const Team = () => {
-
   return (
-    <div className="bg-[#F6F6F6] p-5">
-        <h3 className="text-[3rem] font-[800] text-[#32347C] text-center">Meet the Team</h3>
-        <div className="flex flex-col items-center gap-4 p-10 md:flex-row md:justify-evenly md:gap-5">
-            <MemberCard image={Mark} name="Mark Limpahan" title="UI/UX Designer" />
-            <MemberCard image={Roxanne} name="Roxanne Locsin" title="UI/UX Designer" />
-            <MemberCard image={Rhenel} name="Rhenel Sajol" title="UI/UX Designer" />
+    <section className="bg-[#f6f6f6] py-10 md:py-16">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-extrabold text-[#32347C] text-center mb-12">Meet the Team</h2>
+        
+        <div className="flex flex-col items-center gap-4 p-4 md:p-8 md:flex-row md:items-baseline md:justify-around md:gap-5">
+          <MemberCard 
+            image={Mark} 
+            name="Mark Vincent Limpahan" 
+            title="UI/UX Designer" 
+          />
+          <MemberCard 
+            image={Roxanne} 
+            name="Roxanne Locsin" 
+            title="Front-end Developer" 
+          />
+          <MemberCard 
+            image={Rhenel} 
+            name="Rhenel Jhon Sajol" 
+            title="Back-end Developer" 
+          />
         </div>
-    </div>
+      </div>
+    </section>
   )
 }
 
 export default Team
-

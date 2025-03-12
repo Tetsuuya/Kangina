@@ -1,7 +1,7 @@
 import React, { useState,} from 'react';
 import { Product } from '../../api/productApi';
-import { useCartStore } from '../../store/cartStore';
-import { useFavoriteStore } from '../../store/storeFavorites';
+import { useCartStore } from '../../store/CartStore';
+import { useFavoriteStore } from '../../store/StoreFavorites';
 import { ProductDetailModal} from './ProductDetailModal';
 
 interface ProductCardProps {
