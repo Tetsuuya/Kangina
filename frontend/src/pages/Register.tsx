@@ -40,10 +40,9 @@ const Register = () => {
     setIsExiting(true);
     setTimeout(() => {
       navigate('/login');
-    }, 300); // Wait for animation to finish
+    }, 300); 
   };
-
-  // Animation variants for staggered animations
+ 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
